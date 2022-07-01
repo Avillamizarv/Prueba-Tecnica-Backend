@@ -8,7 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.beans.FeatureDescriptor;
@@ -43,21 +45,33 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional
     public void updateUser(User aUser) {
-        var userBD = this.iUserRepository.findById(aUser.getId()).orElseThrow(() -> new ResourceNotFoundException("No existe este Usuario" ));
-        this.copiarPropiedadesObjetoAHaciaBIgnorandoNulosDeA(aUser, userBD);
-        userBD.setIdentification(aUser.getIdentification());
-        userBD.setName(aUser.getName());
-        userBD.setTelephone(aUser.getTelephone());
-        aUser = userBD;
-        this.iUserRepository.save(aUser);
+        var userBD = this.iUserRepository.findById(aUser.getId()).orElse(null);
+        if(userBD == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El usuario no existe.");
+        }
+        else{
+            this.copiarPropiedadesObjetoAHaciaBIgnorandoNulosDeA(aUser, userBD);
+            userBD.setIdentification(aUser.getIdentification());
+            userBD.setName(aUser.getName());
+            userBD.setTelephone(aUser.getTelephone());
+            aUser = userBD;
+            this.iUserRepository.save(aUser);
+        }
+
     }
 
     /**Delete a User*/
     @Override
     @Transactional
-    public void deleteUser(Long aId) {
-        var userBD = this.iUserRepository.findById(aId).orElseThrow(() -> new ResourceNotFoundException("No existe un Usuario con id: " +aId));
-        this.iUserRepository.deleteById(userBD.getId());
+    public void deleteUser (Long aId) throws ResponseStatusException {
+        var userBD = this.iUserRepository.findById(aId).orElse(null);
+        if(userBD == null ) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El usuario a eliminar no existe.");
+        }
+        else{
+            this.iUserRepository.deleteById(userBD.getId());
+        }
+
     }
 
     /**

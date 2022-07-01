@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 
 import javax.transaction.TransactionScoped;
@@ -31,15 +32,18 @@ public class UserController {
      * @return List<User>
      */
     @GetMapping(value = "/getUsers")
-    public ResponseEntity<List<UserDTO>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() throws ResponseStatusException{
         List<User> usersList = iUserService
                 .findAll();
-        if (usersList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (usersList.isEmpty() || usersList == null) {
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "No hay usuarios registrados." );
+        } else
+        {
+            return new ResponseEntity<>(usersList.stream()
+                    .map(UserMapper.INSTANCE::toUserDTO).collect(Collectors.toList()),
+                    HttpStatus.OK);
         }
-        return new ResponseEntity<>(usersList.stream()
-                .map(UserMapper.INSTANCE::toUserDTO).collect(Collectors.toList()),
-                HttpStatus.OK);
+
     }
     /**
      * Create User

@@ -14,7 +14,7 @@ export class UserService {
   /**
    * Lista todos los usuarios.
    */
-  getUsersList(): Observable<UserDTO[]> {
+  getUsersList() {
     return this.httpClient.get<UserDTO[]>(`${this.userURL}/getUsers`);
   }
 
