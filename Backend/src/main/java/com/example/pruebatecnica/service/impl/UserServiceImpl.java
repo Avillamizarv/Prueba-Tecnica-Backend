@@ -44,7 +44,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional
     public void updateUser(User aUser) {
-        var userBD = this.iUserRepository.findById(aUser.getId()).orElse(null);
+        User userBD = this.iUserRepository.findById(aUser.getId()).orElse(null);
         if(userBD == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El usuario no existe.");
         }
@@ -63,7 +63,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional
     public void deleteUser (Long aId) throws ResponseStatusException {
-        var userBD = this.iUserRepository.findById(aId).orElse(null);
+        User userBD = this.iUserRepository.findById(aId).orElse(null);
         if(userBD == null ) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El usuario a eliminar no existe.");
         }
