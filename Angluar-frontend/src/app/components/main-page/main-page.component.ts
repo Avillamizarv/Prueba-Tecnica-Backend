@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -19,7 +19,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   //Variable que contiene la data de la tabla
   dataSource = new MatTableDataSource<UserDTO>();
   //Form
-  formEstudios: FormGroup;
+  formEstudios: UntypedFormGroup;
   formInsertMode = true;
   formEditMode = false;
   //Items para configurar la tabla
