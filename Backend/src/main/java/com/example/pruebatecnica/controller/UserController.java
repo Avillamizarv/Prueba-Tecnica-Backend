@@ -52,7 +52,7 @@ public class UserController {
     @TransactionScoped
     @PostMapping(value = "/newUser")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO aUserDTO) {
-        var user = this.iUserService.createUser(UserMapper.INSTANCE.toUser(aUserDTO));
+        User user = this.iUserService.createUser(UserMapper.INSTANCE.toUser(aUserDTO));
         return new ResponseEntity<>(UserMapper.INSTANCE.toUserDTO(user), HttpStatus.CREATED);
     }
 
