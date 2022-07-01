@@ -3,7 +3,6 @@ package com.example.pruebatecnica.service.interfaces;
 import com.example.pruebatecnica.model.User;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**

@@ -1,6 +1,5 @@
 package com.example.pruebatecnica.service.impl;
 
-import com.example.pruebatecnica.exception.ResourceNotFoundException;
 import com.example.pruebatecnica.model.User;
 import com.example.pruebatecnica.repository.IUserRepository;
 import com.example.pruebatecnica.service.interfaces.IUserService;
