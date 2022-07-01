@@ -23,17 +23,10 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {
-  DateAdapter,
-  MatNativeDateModule,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-  MatRippleModule,
-} from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
-import { CheckboxGroupModule } from './checkbox-group/checkbox-group.module';
 import { MatDividerModule } from '@angular/material/divider';
 
 const COMPONENTS = [
@@ -67,7 +60,6 @@ const COMPONENTS = [
   ReactiveFormsModule,
   FormsModule,
   MatSlideToggleModule,
-  CheckboxGroupModule,
   MatDividerModule,
 ];
 
@@ -79,7 +71,7 @@ const COMPONENTS = [
     {
       provide: MatDialogRef,
       useValue: {},
-    },    
+    },
   ],
 })
 export class MaterialModule {}

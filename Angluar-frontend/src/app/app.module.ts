@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http';
 import { CoreModule, FlexLayoutModule } from '@angular/flex-layout';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent, MainPageComponent],
@@ -19,6 +20,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
     MaterialModule,
     BrowserAnimationsModule,
     CoreModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

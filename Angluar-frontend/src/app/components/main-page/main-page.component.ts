@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserDTO } from 'src/app/model/userDTO';
-import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
+//import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -14,12 +14,14 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class MainPageComponent implements OnInit, AfterViewInit {
   //Vistas a componentes hijos para el paginador y ordenamiento de la tabla.
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  @ViewChild(MatSort)
+  sort!: MatSort;
   //Variable que contiene la data de la tabla
   dataSource = new MatTableDataSource<UserDTO>();
   //Form
-  formEstudios: UntypedFormGroup;
+  formEstudios!: UntypedFormGroup;
   formInsertMode = true;
   formEditMode = false;
   //Items para configurar la tabla
@@ -30,7 +32,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   selectedRowIndex = null;
   constructor(
     private userService: UserService,
-    private snackbarService: SnackbarService,
+   // private snackbarService: SnackbarService,
   ) {
     this.paginationGroups = [5, 10, 15]
     this.defaultPagingGroup = 10;
@@ -59,10 +61,10 @@ export class MainPageComponent implements OnInit, AfterViewInit {
           this.dataSource.paginator = this.paginator;
         },
         error: (err) => {
-          this.dataSource = new MatTableDataSource([]);
+          //this.dataSource = new MatTableDataSource([]);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          this.snackbarService.showBackError(err);
+          //this.snackbarService.showBackError(err);
         },
       });
   }
